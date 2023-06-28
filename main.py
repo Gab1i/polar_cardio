@@ -12,20 +12,17 @@ import time
 
 from distutils.core import setup
 
-
 currentMarkerECG = ""
 currentMarkerHR = ""
 currentMarkerRR = ""
 
-
 subjectId = 0
 save = True
-
+stop = False
 x = 0
 data_ecg = []
 xs = []
 ys = []
-
 
 print(f"Starting server...")
 
@@ -76,7 +73,6 @@ rr_tab = []
 
 def hr_conv(sender, data: bytearray):
     timestampPC = str(time.time_ns())
-    global sock
     global currentMarkerHR
     global currentMarkerRR
     byte0 = data[0]
@@ -114,6 +110,7 @@ def hr_conv(sender, data: bytearray):
 
         file_hr.write(timestampPC + ";" + str(current_hr) + ";" + currentMarkerHR + "\n")
         file_rr.write(timestampPC + ";" + str(ibi) + ";" + currentMarkerRR + "\n")
+
         currentMarkerHR = ""
         currentMarkerRR = ""
 
@@ -209,6 +206,7 @@ async def run(client, debug=True):
 
     #print("Collecting ECG data...", flush=True)
 
+    # while not stop:
     await aioconsole.ainput('Running: Press a key to quit')
 
     await client.stop_notify(PMD_DATA)
@@ -241,7 +239,7 @@ def exit_handler():
 list_polar = {
     "25EECC29": "EF:26:15:E6:2E:9F",
     "25EF1825": "FC:40:BC:A4:D5:63",
-    "home": "FADD5FC9-7432-21BA-7D18-0A984CCF13BD"
+    "mac": "CBA0632A-D411-A506-D4D1-2037F314ECF8"
 }
 
 
