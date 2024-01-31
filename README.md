@@ -7,7 +7,7 @@ git clone https://github.com/Gab1i/polar_cardio.git
 
 cd polar_cardio
 
-pip install requirements.txt
+pip install -r requirements.txt
 
 ```
 
