@@ -10,8 +10,6 @@ import datetime as dt
 from math import ceil
 import time
 
-from distutils.core import setup
-
 currentMarkerECG = ""
 currentMarkerHR = ""
 currentMarkerRR = ""
@@ -237,9 +235,7 @@ def exit_handler():
 
 
 list_polar = {
-    "25EECC29": "EF:26:15:E6:2E:9F",
-    "25EF1825": "FC:40:BC:A4:D5:63",
-    "mac": "CBA0632A-D411-A506-D4D1-2037F314ECF8"
+    "25EECC29": "EF:26:15:E6:2E:9F"
 }
 
 
