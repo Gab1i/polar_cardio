@@ -172,8 +172,9 @@ def convert_to_unsigned_long(data, offset, length):
 ## ASynchronous task to start the data stream for ECG ##
 async def run(client, debug=True):
     print("---------Looking for Device------------ ", flush=True)
-
-    await client.is_connected()
+    print(client)
+    if not client.is_connected:
+        raise RuntimeError("Device not connected")
     print("---------Device connected--------------", flush=True)
     print(client)
 
@@ -218,14 +219,8 @@ async def run(client, debug=True):
 
 
 async def main(ADDRESS):
-    try:
-        async with BleakClient(ADDRESS) as client:
-            tasks = [
-                asyncio.ensure_future(run(client, True)),
-            ]
-            await asyncio.gather(*tasks)
-    except:
-        pass
+    async with BleakClient(ADDRESS) as client:
+        await run(client, True)
 
 
 def exit_handler():
@@ -235,7 +230,7 @@ def exit_handler():
 
 
 list_polar = {
-    "25EECC29": "EF:26:15:E6:2E:9F"
+    "183A9D2C": "E3220437-6FCC-4831-D296-3C4A75980A75"
 }
 
 
